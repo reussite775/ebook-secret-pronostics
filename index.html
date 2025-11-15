@@ -34,76 +34,20 @@
     transform: translateY(20px);
     transition: all 0.8s ease;
   }
-  h1 {
-    color: #ffdd59;
-    text-align: center;
-    font-size: 2.5em;
-  }
-  h2 {
-    text-align: center;
-    font-weight: normal;
-    margin-bottom: 20px;
-  }
-  p {
-    line-height: 1.6;
-    font-size: 1.1em;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  ul li {
-    background: rgba(255,255,255,0.2);
-    margin: 10px 0;
-    padding: 12px 15px;
-    border-left: 5px solid #ffdd59;
-    border-radius: 5px;
-    transform: translateX(-30px);
-    opacity: 0;
-    transition: all 0.6s ease;
-  }
-  .price {
-    text-align: center;
-    font-size: 2em;
-    color: #ffdd59;
-    margin: 20px 0;
-    font-weight: bold;
-  }
-  .cta {
-    display: block;
-    width: 100%;
-    text-align: center;
-    background: #ffdd59;
-    color: #1e3c72;
-    padding: 15px 0;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.3em;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-  }
-  .cta:hover {
-    background: #ffd500;
-    transform: scale(1.05);
-  }
-  .bonus {
-    background: rgba(255, 255, 255, 0.2);
-    border-left: 5px solid #ffd500;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  .testimonial {
-    font-style: italic;
-    text-align: center;
-    margin: 20px 0;
-  }
-
-  @media (max-width: 600px) {
-    .container { padding: 20px; }
-    h1 { font-size: 2em; }
-  }
+  h1 { color: #ffdd59; text-align: center; font-size: 2.5em; }
+  h2 { text-align: center; font-weight: normal; margin-bottom: 20px; }
+  p { line-height: 1.6; font-size: 1.1em; }
+  ul { list-style: none; padding: 0; }
+  ul li { background: rgba(255,255,255,0.2); margin: 10px 0; padding: 12px 15px; border-left: 5px solid #ffdd59; border-radius: 5px; transform: translateX(-30px); opacity: 0; transition: all 0.6s ease; }
+  .price { text-align: center; font-size: 2em; color: #ffdd59; margin: 20px 0; font-weight: bold; }
+  .cta { display: block; width: 100%; text-align: center; background: #ffdd59; color: #1e3c72; padding: 15px 0; text-decoration: none; border-radius: 8px; font-size: 1.3em; font-weight: bold; transition: all 0.3s ease; margin-top: 20px; }
+  .cta:hover { background: #ffd500; transform: scale(1.05); }
+  .bonus { background: rgba(255, 255, 255, 0.2); border-left: 5px solid #ffd500; padding: 15px; border-radius: 5px; margin-top: 20px; }
+  .testimonial { font-style: italic; text-align: center; margin: 20px 0; }
+  input { width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 15px; }
+  button { cursor: pointer; }
+  .whatsapp-number { text-align: center; margin-top: 20px; font-size: 1.2em; background: #25D366; padding: 10px; border-radius: 8px; color: #fff; display: none; }
+  .copy-btn { background: #128C7E; padding: 8px 15px; border-radius: 5px; margin-top: 10px; display: inline-block; color: #fff; text-decoration: none; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -124,11 +68,26 @@
   </ul>
 
   <div class="testimonial">« J’ai doublé mes gains en un mois grâce à cet ebook ! »</div>
-
   <div class="price">5000 FCFA</div>
 
-  <!-- Bouton Payer Maintenant vers WhatsApp -->
-  <a href="https://wa.me/229199555147?text=Bonjour,%20je%20veux%20acheter%20l'ebook%20de%205000FCFA.%20Nom:%20%0APrénom:%20%0AMoyen%20de%20paiement:%20" class="cta" target="_blank">Payer Maintenant</a>
+  <!-- Bouton Payer Maintenant -->
+  <button class="cta" id="payerBtn">Payer Maintenant</button>
+
+  <!-- Formulaire automatique -->
+  <div id="formulaireContainer" style="display:none;">
+    <h2>Remplissez vos informations :</h2>
+    <input type="text" id="nom" placeholder="Nom" required>
+    <input type="text" id="prenom" placeholder="Prénom" required>
+    <input type="text" id="paiement" placeholder="Moyen de paiement (Ex: Orange Money)" required>
+    <button class="cta" id="envoyerForm">Envoyer</button>
+  </div>
+
+  <!-- WhatsApp -->
+  <div class="whatsapp-number" id="whatsappSection">
+    <p>Envoyez maintenant le paiement sur WhatsApp :</p>
+    <span id="numeroWhatsApp">0199555147</span><br>
+    <a class="copy-btn" id="copyBtn">Copier le numéro</a>
+  </div>
 
   <div class="bonus">
     <h2>Bonus Exclusif :</h2>
@@ -151,10 +110,36 @@
       }
     }
   }
-
   window.addEventListener("scroll", reveal);
   window.addEventListener("load", reveal);
-</script>
 
+  // Bouton Payer Maintenant
+  document.getElementById('payerBtn').addEventListener('click', function(){
+    document.getElementById('formulaireContainer').style.display = 'block';
+    this.style.display = 'none';
+  });
+
+  // Envoyer formulaire
+  document.getElementById('envoyerForm').addEventListener('click', function(){
+    let nom = document.getElementById('nom').value;
+    let prenom = document.getElementById('prenom').value;
+    let paiement = document.getElementById('paiement').value;
+    if(nom && prenom && paiement){
+      document.getElementById('formulaireContainer').style.display = 'none';
+      document.getElementById('whatsappSection').style.display = 'block';
+      alert("Merci ! Copiez le numéro WhatsApp pour envoyer votre paiement.");
+    } else {
+      alert("Veuillez remplir tous les champs !");
+    }
+  });
+
+  // Copier le numéro WhatsApp
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    const numero = document.getElementById('numeroWhatsApp').innerText;
+    navigator.clipboard.writeText(numero).then(()=>{
+      alert("Numéro WhatsApp copié !");
+    });
+  });
+</script>
 </body>
 </html>
