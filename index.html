@@ -81,6 +81,7 @@
     font-size: 1.3em;
     font-weight: bold;
     transition: all 0.3s ease;
+    margin-top: 20px;
   }
   .cta:hover {
     background: #ffd500;
@@ -126,7 +127,8 @@
 
   <div class="price">5000 FCFA</div>
 
-  <a href="https://raw.githubusercontent.com/reussite775/ebook-secret-pronostics/main/ebook-secret-pronostics.pdf" class="cta">Télécharger Maintenant</a>
+  <!-- Bouton Payer Maintenant vers WhatsApp -->
+  <a href="https://wa.me/2299019955147?text=Bonjour,%20je%20veux%20acheter%20l'ebook%20de%205000FCFA.%20Nom:%20%0APrénom:%20%0AMoyen%20de%20paiement:%20" class="cta" target="_blank">Payer Maintenant</a>
 
   <div class="bonus">
     <h2>Bonus Exclusif :</h2>
@@ -138,7 +140,7 @@
 <script>
   // Animation au scroll
   function reveal() {
-    const elements = document.querySelectorAll('h1, h2, p, ul li, .testimonial, .price, .bonus');
+    const elements = document.querySelectorAll('h1, h2, p, ul li, .testimonial, .price, .bonus, .cta');
     for (let i = 0; i < elements.length; i++) {
       let windowHeight = window.innerHeight;
       let elementTop = elements[i].getBoundingClientRect().top;
