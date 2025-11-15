@@ -1,136 +1,193 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ebook Paris Sportifs</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom right, #1e3c72, #2a5298);
-    color: #fff;
-    overflow-x: hidden;
-  }
-  .overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: -1;
-  }
-  .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  }
-  h1, h2, p, ul, .testimonial, .price, .bonus {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
-  }
-  h1 { color: #ffdd59; text-align: center; font-size: 2.5em; }
-  h2 { text-align: center; font-weight: normal; margin-bottom: 20px; }
-  p { line-height: 1.6; font-size: 1.1em; }
-  ul { list-style: none; padding: 0; }
-  ul li { background: rgba(255,255,255,0.2); margin: 10px 0; padding: 12px 15px; border-left: 5px solid #ffdd59; border-radius: 5px; transform: translateX(-30px); opacity: 0; transition: all 0.6s ease; }
-  .price { text-align: center; font-size: 2em; color: #ffdd59; margin: 20px 0; font-weight: bold; }
-  .cta { display: block; width: 100%; text-align: center; background: #ffdd59; color: #1e3c72; padding: 15px 0; text-decoration: none; border-radius: 8px; font-size: 1.3em; font-weight: bold; transition: all 0.3s ease; margin-top: 20px; cursor:pointer; }
-  .cta:hover { background: #ffd500; transform: scale(1.05); }
-  .bonus { background: rgba(255, 255, 255, 0.2); border-left: 5px solid #ffd500; padding: 15px; border-radius: 5px; margin-top: 20px; }
-  .testimonial { font-style: italic; text-align: center; margin: 20px 0; }
-  input { width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 15px; }
-  .whatsapp-section { display: none; text-align: center; margin-top: 20px; }
-  .whatsapp-section p { margin-bottom: 10px; font-size: 1.1em; }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ebook — Secrets des Pronostics Sportifs</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0e0e0e, #1f1f1f);
+            color: white;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(6px);
+            animation: slideUp 0.7s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .promo-box {
+            background: #ff1744;
+            padding: 10px;
+            text-align: center;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #bbbbbb;
+            font-size: 22px;
+        }
+
+        .new-price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00e676;
+        }
+
+        .cta {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            background: #00c853;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cta:hover {
+            background: #00a844;
+        }
+
+        #formSection, #finalMessage {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: none;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .success-box {
+            background: rgba(0, 150, 0, 0.25);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            border-left: 5px solid #00e676;
+        }
+    </style>
 </head>
+
 <body>
-<div class="overlay"></div>
 
-<div class="container">
-  <h1>Découvrez la Méthode Secrète pour Gagner sur les Paris Sportifs !</h1>
-  <h2>Même si vous débutez, augmentez vos chances de gagner grâce à des stratégies simples et éprouvées</h2>
+    <div class="container">
 
-  <p>Marre de perdre vos paris ? Imaginez placer vos paris avec confiance et voir vos gains augmenter chaque semaine ! Cet ebook vous donne toutes les astuces pour transformer votre façon de parier et maximiser vos résultats.</p>
+        <h1>📘 Ebook : Secrets des Pronostics Sportifs</h1>
 
-  <h2>Ce que vous allez apprendre :</h2>
-  <ul>
-    <li>Stratégies pas à pas pour tous types de paris</li>
-    <li>Techniques pour réduire les pertes et maximiser les gains</li>
-    <li>Conseils de pros testés sur le terrain</li>
-    <li>Bonus exclusifs : liste de pronostics fiables</li>
-  </ul>
+        <div class="promo-box">
+            🎉 Offre Spéciale Fêtes — Edition Limitée !
+        </div>
 
-  <div class="testimonial">« J’ai doublé mes gains en un mois grâce à cet ebook ! »</div>
-  <div class="price">5000 FCFA</div>
+        <p style="text-align:center; font-size:18px;">
+            Prix réel : <span class="old-price">25 000 F CFA</span><br>
+            <span class="new-price">🎁 Prix promotionnel : 8 000 F CFA</span><br>
+            🔥 Réservé aux <b>100 premières personnes</b><br>
+            ⏳ Offre valable encore <b>1 mois</b><br><br>
+            Donc profitez les gars. <b>Bonne fêtes à vous 🎄🔥</b>
+        </p>
 
-  <!-- Bouton Payer Maintenant -->
-  <button class="cta" id="payerBtn">Payer Maintenant</button>
+        <div id="paymentButton">
+            <a class="cta" onclick="showForm()">💵 Profiter de l'offre — 8 000 F CFA</a>
+        </div>
 
-  <!-- Formulaire -->
-  <div id="formContainer" style="display:none; margin-top:20px;">
-    <h2>Remplissez vos informations :</h2>
-    <input type="text" id="nom" placeholder="Nom" required>
-    <input type="text" id="prenom" placeholder="Prénom" required>
-    <input type="text" id="paiement" placeholder="Moyen de paiement (Ex: Orange Money)" required>
-    <button class="cta" id="envoyerForm">Envoyer</button>
-  </div>
+        <div id="formSection">
+            <h2>Informations pour réserver votre promotion</h2>
 
-  <!-- WhatsApp -->
-  <div class="whatsapp-section" id="whatsappSection">
-    <p>Merci ! Contactez-moi maintenant sur WhatsApp pour recevoir le numéro de dépôt correspondant à votre moyen de paiement :</p>
-    <a href="https://wa.me/229199555147" target="_blank" class="cta">Contacter sur WhatsApp</a>
-  </div>
+            <input type="text" id="nom" placeholder="Nom" required />
+            <input type="text" id="prenom" placeholder="Prénom" required />
 
-  <div class="bonus">
-    <h2>Bonus Exclusif :</h2>
-    <p>- Accès à un groupe privé pour partager les pronostics et conseils</p>
-    <p>- Liste de pronostics gratuits pour le premier mois</p>
-  </div>
-</div>
+            <select id="moyen">
+                <option value="">Sélectionnez un moyen de paiement</option>
+                <option value="MTN">MTN Mobile Money</option>
+                <option value="Moov">Moov Money</option>
+                <option value="Wave">Wave</option>
+                <option value="FLOOZ">FLOOZ</option>
+            </select>
 
-<script>
-  // Animation au scroll
-  function reveal() {
-    const elements = document.querySelectorAll('h1, h2, p, ul li, .testimonial, .price, .bonus, .cta');
-    for (let i = 0; i < elements.length; i++) {
-      let windowHeight = window.innerHeight;
-      let elementTop = elements[i].getBoundingClientRect().top;
-      let elementVisible = 150;
-      if (elementTop < windowHeight - elementVisible) {
-        elements[i].style.opacity = "1";
-        elements[i].style.transform = "translateY(0)";
-      }
-    }
-  }
-  window.addEventListener("scroll", reveal);
-  window.addEventListener("load", reveal);
+            <a class="cta" onclick="validateForm()">Envoyer</a>
+        </div>
 
-  // Afficher formulaire après cliquer sur Payer Maintenant
-  document.getElementById('payerBtn').addEventListener('click', function(){
-    this.style.display = 'none';
-    document.getElementById('formContainer').style.display = 'block';
-  });
+        <div id="finalMessage" class="success-box">
+            <h3>✔️ Merci !</h3>
+            <p>Vos informations ont été enregistrées.</p>
+            <p>Contactez-moi maintenant sur WhatsApp pour recevoir le numéro de dépôt correspondant :</p>
 
-  // Envoyer formulaire
-  document.getElementById('envoyerForm').addEventListener('click', function(){
-    let nom = document.getElementById('nom').value.trim();
-    let prenom = document.getElementById('prenom').value.trim();
-    let paiement = document.getElementById('paiement').value.trim();
-    if(nom && prenom && paiement){
-      document.getElementById('formContainer').style.display = 'none';
-      document.getElementById('whatsappSection').style.display = 'block';
-      alert("Merci ! Veuillez maintenant me contacter sur WhatsApp pour recevoir le numéro de dépôt correspondant.");
-    } else {
-      alert("Veuillez remplir tous les champs !");
-    }
-  });
-</script>
+            <h2 style="font-size: 26px; color: #00e676; margin-top: 10px;">
+                📞 0199555147
+            </h2>
+
+            <p>Après paiement, vous recevrez immédiatement le lien de téléchargement de l’ebook.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function showForm() {
+            document.getElementById("formSection").style.display = "block";
+        }
+
+        function validateForm() {
+            let nom = document.getElementById("nom").value;
+            let prenom = document.getElementById("prenom").value;
+            let moyen = document.getElementById("moyen").value;
+
+            if (nom === "" || prenom === "" || moyen === "") {
+                alert("Veuillez remplir toutes les informations.");
+                return;
+            }
+
+            document.getElementById("finalMessage").style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
