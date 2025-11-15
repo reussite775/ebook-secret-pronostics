@@ -59,6 +59,10 @@
             100% { transform: scale(1); }
         }
 
+        ul li {
+            margin-bottom: 8px;
+        }
+
         .old-price {
             text-decoration: line-through;
             color: #bbbbbb;
@@ -114,6 +118,22 @@
             text-align: center;
             border-left: 5px solid #00e676;
         }
+
+        #remainingBox, #countdownBox {
+            margin-top:20px;
+            background:#111;
+            padding:15px;
+            border-radius:8px;
+            text-align:center;
+            font-size:18px;
+            border:1px solid #00e676;
+            animation:pulse 2s infinite;
+        }
+
+        #countdownBox {
+            border-color: #ff1744;
+        }
+
     </style>
 </head>
 
@@ -123,22 +143,70 @@
 
         <h1>📘 Ebook : Secrets des Pronostics Sportifs</h1>
 
+        <!-- SECTION APERÇU -->
+        <section class="preview">
+            <h2 style="text-align:center; margin-bottom:15px;">🔍 Aperçu de l’Ebook</h2>
+            <p style="text-align:center; font-size:17px;">
+                Voici un aperçu du contenu exclusif que vous allez recevoir :
+            </p>
+
+            <ul style="font-size:17px; line-height:1.7; margin-top:15px;">
+                <li>✔️ Méthodes professionnelles pour analyser un match</li>
+                <li>✔️ Les erreurs fatales que 90% des parieurs commettent</li>
+                <li>✔️ Comment détecter les value bets (cotes sûres)</li>
+                <li>✔️ Stratégies pour minimiser vos pertes et maximiser vos gains</li>
+                <li>✔️ Système simple pour créer vos propres pronostics gagnants</li>
+                <li>✔️ Gestion de bankroll utilisée par les parieurs pros</li>
+                <li>✔️ Exemples pratiques + analyses réelles</li>
+            </ul>
+
+            <div style="
+                margin-top:20px;
+                background: rgba(255,255,255,0.08);
+                padding: 15px;
+                border-radius: 10px;
+                font-size: 16px;
+                text-align: center;
+                animation: fadeIn 1s;
+            ">
+                📘 *Contenu basé sur mes propres stratégies gagnantes et mon expérience réelle.*
+            </div>
+        </section>
+
+        <!-- PROMO BOX -->
         <div class="promo-box">
             🎉 Offre Spéciale Fêtes — Edition Limitée !
         </div>
 
+        <!-- PRIX -->
         <p style="text-align:center; font-size:18px;">
             Prix réel : <span class="old-price">25 000 F CFA</span><br>
-            <span class="new-price">🎁 Prix promotionnel : 8 000 F CFA</span><br>
+            Prix promo : <span class="new-price" id="promo-price">8 000 F CFA</span><br>
             🔥 Réservé aux <b>100 premières personnes</b><br>
             ⏳ Offre valable encore <b>1 mois</b><br><br>
-            Donc profitez les gars. <b>Bonne fêtes à vous 🎄🔥</b>
+            <span id="promo-note">Donc profitez les gars. <b>Bonne fêtes à vous 🎄🔥</b></span>
         </p>
 
+        <!-- COMPTEUR PLACES RESTANTES -->
+        <div id="remainingBox">
+            🔥 Places restantes : 
+            <span id="placesRestantes" style="font-size:26px; font-weight:bold;">100</span> / 100
+        </div>
+
+        <!-- COMPTE À REBOURS -->
+        <div id="countdownBox">
+            ⏳ Offre se termine dans :
+            <div id="countdown" style="font-size:26px; font-weight:bold; margin-top:8px;">
+                30j 00h 00m 00s
+            </div>
+        </div>
+
+        <!-- BOUTON PAYER -->
         <div id="paymentButton">
             <a class="cta" onclick="showForm()">💵 Profiter de l'offre — 8 000 F CFA</a>
         </div>
 
+        <!-- FORMULAIRE -->
         <div id="formSection">
             <h2>Informations pour réserver votre promotion</h2>
 
@@ -156,6 +224,7 @@
             <a class="cta" onclick="validateForm()">Envoyer</a>
         </div>
 
+        <!-- MESSAGE FINAL -->
         <div id="finalMessage" class="success-box">
             <h3>✔️ Merci !</h3>
             <p>Vos informations ont été enregistrées.</p>
@@ -170,7 +239,23 @@
 
     </div>
 
+    <!-- SCRIPTS -->
     <script>
+        // ---------------------
+        // FORMULAIRE + COMPTEUR
+        // ---------------------
+        let totalPlaces = 100;
+
+        if (localStorage.getItem("placesRestantes")) {
+            totalPlaces = parseInt(localStorage.getItem("placesRestantes"));
+        } else {
+            localStorage.setItem("placesRestantes", totalPlaces);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("placesRestantes").textContent = totalPlaces;
+        });
+
         function showForm() {
             document.getElementById("formSection").style.display = "block";
         }
@@ -185,8 +270,56 @@
                 return;
             }
 
+            if (totalPlaces > 0) {
+                totalPlaces--;
+                localStorage.setItem("placesRestantes", totalPlaces);
+                document.getElementById("placesRestantes").textContent = totalPlaces;
+            }
+
             document.getElementById("finalMessage").style.display = "block";
         }
+
+        function resetPlaces() {
+            totalPlaces = 100;
+            localStorage.setItem("placesRestantes", totalPlaces);
+            document.getElementById("placesRestantes").textContent = totalPlaces;
+            alert("Compteur réinitialisé !");
+        }
+
+        // ---------------------
+        // COMPTE À REBOURS 30 JOURS
+        // ---------------------
+        let endDate;
+        if (localStorage.getItem("promoEndDate")) {
+            endDate = new Date(localStorage.getItem("promoEndDate"));
+        } else {
+            endDate = new Date();
+            endDate.setDate(endDate.getDate() + 30);
+            localStorage.setItem("promoEndDate", endDate);
+        }
+
+        function updateCountdown() {
+            let now = new Date();
+            let diff = endDate - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").textContent = "EXPIRÉ";
+                document.getElementById("promo-price").textContent = "25 000 F CFA";
+                document.getElementById("promo-note").textContent = "L'offre est expirée.";
+                return;
+            }
+
+            let jours = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let heures = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let secondes = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").textContent =
+                `${jours}j ${heures}h ${minutes}m ${secondes}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 
 </body>
