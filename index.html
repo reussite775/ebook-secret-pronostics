@@ -40,14 +40,13 @@
   ul { list-style: none; padding: 0; }
   ul li { background: rgba(255,255,255,0.2); margin: 10px 0; padding: 12px 15px; border-left: 5px solid #ffdd59; border-radius: 5px; transform: translateX(-30px); opacity: 0; transition: all 0.6s ease; }
   .price { text-align: center; font-size: 2em; color: #ffdd59; margin: 20px 0; font-weight: bold; }
-  .cta { display: block; width: 100%; text-align: center; background: #ffdd59; color: #1e3c72; padding: 15px 0; text-decoration: none; border-radius: 8px; font-size: 1.3em; font-weight: bold; transition: all 0.3s ease; margin-top: 20px; }
+  .cta { display: block; width: 100%; text-align: center; background: #ffdd59; color: #1e3c72; padding: 15px 0; text-decoration: none; border-radius: 8px; font-size: 1.3em; font-weight: bold; transition: all 0.3s ease; margin-top: 20px; cursor:pointer; }
   .cta:hover { background: #ffd500; transform: scale(1.05); }
   .bonus { background: rgba(255, 255, 255, 0.2); border-left: 5px solid #ffd500; padding: 15px; border-radius: 5px; margin-top: 20px; }
   .testimonial { font-style: italic; text-align: center; margin: 20px 0; }
   input { width: 100%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 15px; }
-  button { cursor: pointer; }
-  .whatsapp-number { text-align: center; margin-top: 20px; font-size: 1.2em; background: #25D366; padding: 10px; border-radius: 8px; color: #fff; display: none; }
-  .copy-btn { background: #128C7E; padding: 8px 15px; border-radius: 5px; margin-top: 10px; display: inline-block; color: #fff; text-decoration: none; cursor: pointer; }
+  .whatsapp-section { display: none; text-align: center; margin-top: 20px; }
+  .whatsapp-section p { margin-bottom: 10px; font-size: 1.1em; }
 </style>
 </head>
 <body>
@@ -73,8 +72,8 @@
   <!-- Bouton Payer Maintenant -->
   <button class="cta" id="payerBtn">Payer Maintenant</button>
 
-  <!-- Formulaire automatique -->
-  <div id="formulaireContainer" style="display:none;">
+  <!-- Formulaire -->
+  <div id="formContainer" style="display:none; margin-top:20px;">
     <h2>Remplissez vos informations :</h2>
     <input type="text" id="nom" placeholder="Nom" required>
     <input type="text" id="prenom" placeholder="Prénom" required>
@@ -83,10 +82,9 @@
   </div>
 
   <!-- WhatsApp -->
-  <div class="whatsapp-number" id="whatsappSection">
-    <p>Envoyez maintenant le paiement sur WhatsApp :</p>
-    <span id="numeroWhatsApp">0199555147</span><br>
-    <a class="copy-btn" id="copyBtn">Copier le numéro</a>
+  <div class="whatsapp-section" id="whatsappSection">
+    <p>Merci ! Contactez-moi maintenant sur WhatsApp pour recevoir le numéro de dépôt correspondant à votre moyen de paiement :</p>
+    <a href="https://wa.me/229199555147" target="_blank" class="cta">Contacter sur WhatsApp</a>
   </div>
 
   <div class="bonus">
@@ -113,33 +111,26 @@
   window.addEventListener("scroll", reveal);
   window.addEventListener("load", reveal);
 
-  // Bouton Payer Maintenant
+  // Afficher formulaire après cliquer sur Payer Maintenant
   document.getElementById('payerBtn').addEventListener('click', function(){
-    document.getElementById('formulaireContainer').style.display = 'block';
     this.style.display = 'none';
+    document.getElementById('formContainer').style.display = 'block';
   });
 
   // Envoyer formulaire
   document.getElementById('envoyerForm').addEventListener('click', function(){
-    let nom = document.getElementById('nom').value;
-    let prenom = document.getElementById('prenom').value;
-    let paiement = document.getElementById('paiement').value;
+    let nom = document.getElementById('nom').value.trim();
+    let prenom = document.getElementById('prenom').value.trim();
+    let paiement = document.getElementById('paiement').value.trim();
     if(nom && prenom && paiement){
-      document.getElementById('formulaireContainer').style.display = 'none';
+      document.getElementById('formContainer').style.display = 'none';
       document.getElementById('whatsappSection').style.display = 'block';
-      alert("Merci ! Copiez le numéro WhatsApp pour envoyer votre paiement.");
+      alert("Merci ! Veuillez maintenant me contacter sur WhatsApp pour recevoir le numéro de dépôt correspondant.");
     } else {
       alert("Veuillez remplir tous les champs !");
     }
   });
-
-  // Copier le numéro WhatsApp
-  document.getElementById('copyBtn').addEventListener('click', function(){
-    const numero = document.getElementById('numeroWhatsApp').innerText;
-    navigator.clipboard.writeText(numero).then(()=>{
-      alert("Numéro WhatsApp copié !");
-    });
-  });
 </script>
+
 </body>
 </html>
