@@ -143,6 +143,39 @@
 
         <h1>📘 Ebook : Secrets des Pronostics Sportifs</h1>
 
+        <!-- SECTION PREUVES + BONUS VIP -->
+        <section class="preuve-section" style="margin-top:25px; text-align:center;">
+            
+            <h2 style="font-size:22px; margin-bottom:15px;">📸 Résultats Réels – Preuves de Gains</h2>
+
+            <p style="font-size:16px; margin-bottom:20px;">
+                Voici quelques preuves réelles de gains obtenues grâce aux stratégies présentées dans l’ebook :
+            </p>
+
+            <!-- IMAGE 1 -->
+            <img src="image1.jpg" alt="Preuve gain 1" 
+                style="width:100%; max-width:500px; border-radius:12px; margin-bottom:20px; box-shadow:0 0 15px rgba(255,255,255,0.2);" />
+
+            <!-- IMAGE 2 -->
+            <img src="image2.jpg" alt="Preuve gain 2"
+                style="width:100%; max-width:500px; border-radius:12px; margin-bottom:20px; box-shadow:0 0 15px rgba(255,255,255,0.2);" />
+
+            <div style="
+                background:rgba(0,255,140,0.15);
+                padding:15px;
+                border-left:4px solid #00e676;
+                border-radius:8px;
+                margin-top:15px;
+                font-size:17px;
+                line-height:1.6;">
+                🎯 <b>Bonus exclusif :</b><br>
+                <b>Les 30 premières personnes</b> qui achètent l’ebook auront accès à un  
+                <span style="color:#00e676; font-weight:bold;">🎁 Suivi Spécial dans le Groupe VIP Poker</span> !
+                <br>Analyse, pronostics guidés, stratégies et accompagnement direct.
+            </div>
+
+        </section>
+
         <!-- SECTION APERÇU -->
         <section class="preview">
             <h2 style="text-align:center; margin-bottom:15px;">🔍 Aperçu de l’Ebook</h2>
@@ -241,9 +274,6 @@
 
     <!-- SCRIPTS -->
     <script>
-        // ---------------------
-        // FORMULAIRE + COMPTEUR
-        // ---------------------
         let totalPlaces = 100;
 
         if (localStorage.getItem("placesRestantes")) {
@@ -279,16 +309,7 @@
             document.getElementById("finalMessage").style.display = "block";
         }
 
-        function resetPlaces() {
-            totalPlaces = 100;
-            localStorage.setItem("placesRestantes", totalPlaces);
-            document.getElementById("placesRestantes").textContent = totalPlaces;
-            alert("Compteur réinitialisé !");
-        }
-
-        // ---------------------
         // COMPTE À REBOURS 30 JOURS
-        // ---------------------
         let endDate;
         if (localStorage.getItem("promoEndDate")) {
             endDate = new Date(localStorage.getItem("promoEndDate"));
