@@ -1,281 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ebook — Secrets des Pronostics Sportifs</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ebook — Secrets des Paris Sportifs</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0e0e0e, #1f1f1f);
-            color: white;
-            margin: 0;
-            padding: 0;
-            animation: fadeIn 1s ease-in-out;
-        }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0e0e0e, #1f1f1f);
+    color: white;
+    margin: 0;
+    padding: 0;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.container {
+    max-width: 750px;
+    margin: 50px auto;
+    background: rgba(255,255,255,0.06);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    backdrop-filter: blur(6px);
+}
 
-        .container {
-            max-width: 750px;
-            margin: 50px auto;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(6px);
-            animation: slideUp 0.7s ease;
-        }
+h1, h2 { text-align:center; }
+h1 { font-size:28px; margin-bottom:15px; }
+h2 { font-size:22px; margin-bottom:10px; }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+ul li { margin-bottom:8px; font-size:17px; }
 
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
+.promo-box {
+    background:#ff1744;
+    padding:10px;
+    text-align:center;
+    border-radius:6px;
+    margin-bottom:20px;
+    font-size:18px;
+    font-weight:bold;
+    animation:pulse 2s infinite;
+}
 
-        .promo-box {
-            background: #ff1744;
-            padding: 10px;
-            text-align: center;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
+@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.03);}100%{transform:scale(1);}}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
+.old-price { text-decoration: line-through; color: #bbbbbb; font-size:22px; }
+.new-price { font-size:32px; font-weight:bold; color:#00e676; }
 
-        ul li {
-            margin-bottom: 8px;
-        }
+.cta {
+    display:inline-block; width:100%; text-align:center; padding:14px;
+    background:#00c853; color:white; font-size:18px; font-weight:bold;
+    border-radius:8px; text-decoration:none; margin-top:20px; cursor:pointer;
+}
+.cta:hover { background:#00a844; }
 
-        .old-price {
-            text-decoration: line-through;
-            color: #bbbbbb;
-            font-size: 22px;
-        }
+#formSection, #finalMessage { display:none; margin-top:25px; }
 
-        .new-price {
-            font-size: 32px;
-            font-weight: bold;
-            color: #00e676;
-        }
+input, select { width:100%; padding:12px; border-radius:6px; border:none; margin-top:10px; margin-bottom:15px; }
 
-        .cta {
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 14px;
-            background: #00c853;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.success-box {
+    background: rgba(0,150,0,0.25); padding:20px; border-radius:8px;
+    margin-top:20px; text-align:center; border-left:5px solid #00e676;
+}
 
-        .cta:hover {
-            background: #00a844;
-        }
+#remainingBox {
+    margin-top:20px; background:#111; padding:15px; border-radius:8px;
+    text-align:center; font-size:18px; border:1px solid #00e676;
+    animation: pulseCounter 1.5s infinite;
+}
 
-        #formSection, #finalMessage {
-            display: none;
-            margin-top: 25px;
-        }
+@keyframes pulseCounter {
+    0%   { transform: scale(1); box-shadow: 0 0 10px #00e676; }
+    50%  { transform: scale(1.05); box-shadow: 0 0 20px #00ff88; }
+    100% { transform: scale(1); box-shadow: 0 0 10px #00e676; }
+}
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: none;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
+.bonus-box {
+    background:#1a1a1a; padding:18px; border-left:5px solid #ff8800;
+    margin-top:20px; border-radius:6px; font-size:16px;
+}
+.bonus-box h3 { margin:0; font-weight:bold; color:#ffb74d; }
+.bonus-box p { margin:8px 0 0; line-height:1.5; color:#fff; }
 
-        .success-box {
-            background: rgba(0, 150, 0, 0.25);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            border-left: 5px solid #00e676;
-        }
-
-        #remainingBox, #countdownBox {
-            margin-top:20px;
-            background:#111;
-            padding:15px;
-            border-radius:8px;
-            text-align:center;
-            font-size:18px;
-            border:1px solid #00e676;
-            animation:pulse 2s infinite;
-        }
-
-        #countdownBox {
-            border-color: #ff1744;
-        }
-
-        /* Section bonus PDF */
-        .bonus-box {
-            background:#1a1a1a;
-            padding:18px;
-            border-left:5px solid #ff8800;
-            margin-top:20px;
-            border-radius:6px;
-            font-size:16px;
-        }
-
-        .bonus-box h3 {
-            margin:0;
-            font-weight:bold;
-            color:#ffb74d;
-        }
-
-        .bonus-box p {
-            margin:8px 0 0;
-            line-height:1.5;
-            color:#fff;
-        }
-
-    </style>
+</style>
 </head>
 
 <body>
+<div class="container">
 
-    <div class="container">
+<h1>📘 Secrets des Paris Sportifs</h1>
 
-        <h1>📘 Ebook : Secrets des Pronostics Sportifs</h1>
+<div class="promo-box">🎉 Offre Spéciale Fêtes — Edition Limitée !</div>
 
-        <div class="promo-box">
-            🎉 Offre Spéciale Fêtes — Edition Limitée !
-        </div>
+<!-- Aperçu ebook -->
+<section>
+    <h2>🔍 Aperçu de l’Ebook</h2>
+    <p style="text-align:center; font-size:17px;">
+        Apprenez à placer vos paris sportifs intelligemment et évitez les erreurs les plus courantes.
+    </p>
+    <ul>
+        <li>❌ Les erreurs fatales que 90% des parieurs commettent</li>
+        <li>✔️ Comment analyser un match pour maximiser vos gains</li>
+        <li>✔️ Stratégies simples pour détecter les cotes sûres</li>
+        <li>✔️ Techniques pour gérer votre bankroll efficacement</li>
+        <li>✔️ Exemples pratiques et analyses réelles</li>
+    </ul>
+    <p style="text-align:center; font-size:16px; color:#ccc;">
+        Basé sur mes stratégies gagnantes et mon expérience réelle.
+    </p>
+</section>
 
-        <p style="text-align:center; font-size:18px;">
-            Découvrez les secrets pour réussir vos pronostics sportifs et maximiser vos gains.<br>
-            Prix réel : <span class="old-price">25 000 F CFA</span><br>
-            Prix promo : <span class="new-price">8 000 F CFA</span><br>
-            🔥 Réservé aux <b>100 premières personnes</b><br>
-            ⏳ Offre valable encore <b>1 mois</b>
-        </p>
+<!-- Prix et compteur -->
+<p style="text-align:center; font-size:18px;">
+    Prix réel : <span class="old-price">25 000 F CFA</span><br>
+    Prix promo : <span class="new-price">8 000 F CFA</span><br>
+    🔥 Réservé aux <b>100 premières personnes</b>
+</p>
 
-        <div id="remainingBox">
-            🔥 Places restantes :
-            <span id="placesRestantes" style="font-size:26px; font-weight:bold;">85</span> / 100
-        </div>
+<div id="remainingBox">
+    🔥 Places restantes : <span id="placesRestantes" style="font-size:26px; font-weight:bold;">85</span> / 100
+</div>
 
-        <!-- Section Bonus PDF -->
-        <div class="bonus-box">
-            <h3>🎁 Bonus Exclusif</h3>
-            <p>
-                En rejoignant aujourd’hui, vous recevez <strong>3 PDF offerts</strong> pour débuter :
-                <br>📘 <strong>Guide du Trading pour Débutants</strong>
-                <br>📗 <strong>Introduction à l’E-commerce</strong>
-                <br>📕 <strong>Techniques de Paris Sportifs</strong>
-                <br><br>
-                Ces ressources vous permettront de progresser rapidement et d’éviter les erreurs les plus courantes.
-            </p>
-        </div>
+<!-- Bonus PDF -->
+<div class="bonus-box">
+    <h3>🎁 Bonus Exclusif</h3>
+    <p>
+        Recevez <strong>3 PDF offerts</strong> pour débuter :
+        <br>📘 Guide du Trading pour Débutants
+        <br>📗 Introduction à l’E-commerce
+        <br>📕 Techniques de Paris Sportifs
+    </p>
+</div>
 
-        <div id="paymentButton">
-            <a class="cta" onclick="showForm()">💵 Profiter de l'offre — 8 000 F CFA</a>
-        </div>
+<!-- Bouton paiement -->
+<div id="paymentButton">
+    <a class="cta" onclick="showForm()">💵 Profiter de l'offre — 8 000 F CFA</a>
+</div>
 
-        <div id="formSection">
-            <h2>Informations</h2>
+<!-- Formulaire -->
+<div id="formSection">
+    <h2>Informations</h2>
+    <input type="text" id="nom" placeholder="Nom" required />
+    <input type="text" id="prenom" placeholder="Prénom" required />
+    <select id="moyen">
+        <option value="">Sélectionnez un moyen de paiement</option>
+        <option value="MTN">MTN Mobile Money</option>
+        <option value="Moov">Moov Money</option>
+        <option value="Wave">Wave</option>
+        <option value="FLOOZ">FLOOZ</option>
+    </select>
+    <a class="cta" onclick="validateForm()">Envoyer</a>
+</div>
 
-            <input type="text" id="nom" placeholder="Nom" required />
-            <input type="text" id="prenom" placeholder="Prénom" required />
+<!-- Message final -->
+<div id="finalMessage" class="success-box">
+    <h3>✔️ Merci !</h3>
+    <p>Vos informations ont été enregistrées.</p>
+    <p>Contactez-moi maintenant :</p>
+    <h2 style="font-size:26px; color:#00e676; margin-top:10px;">
+        📞 0199555147
+    </h2>
+</div>
 
-            <select id="moyen">
-                <option value="">Sélectionnez un moyen de paiement</option>
-                <option value="MTN">MTN Mobile Money</option>
-                <option value="Moov">Moov Money</option>
-                <option value="Wave">Wave</option>
-                <option value="FLOOZ">FLOOZ</option>
-            </select>
-
-            <a class="cta" onclick="validateForm()">Envoyer</a>
-        </div>
-
-        <div id="finalMessage" class="success-box">
-            <h3>✔️ Merci !</h3>
-            <p>Vos informations ont été enregistrées.</p>
-            <p>Contactez-moi maintenant :</p>
-
-            <h2 style="font-size: 26px; color: #00e676; margin-top: 10px;">
-                📞 0199555147
-            </h2>
-        </div>
-
-    </div>
+</div>
 
 <script>
-    // Compteur qui baisse automatiquement chaque 24h
-    let initialPlaces = 85;
+// Compteur automatique 85 -> baisse 1 toutes les 24h
+let initialPlaces = 85;
+let places = parseInt(localStorage.getItem("placesRestantes")) || initialPlaces;
+let lastDecrease = parseInt(localStorage.getItem("lastDecreaseTime")) || Date.now();
 
-    let places = localStorage.getItem("placesRestantes");
-    let lastDecrease = localStorage.getItem("lastDecreaseTime");
-
-    if (!places) {
-        places = initialPlaces;
+function checkDailyDecrease() {
+    let now = Date.now();
+    let diff = now - lastDecrease;
+    if(diff >= 86400000){ // 24h
+        places = Math.max(0, places - 1);
+        lastDecrease = now;
         localStorage.setItem("placesRestantes", places);
+        localStorage.setItem("lastDecreaseTime", lastDecrease);
     }
+}
 
-    function checkDailyDecrease() {
-        let now = Date.now();
-        if (!lastDecrease) {
-            localStorage.setItem("lastDecreaseTime", now);
-            return;
-        }
-        let diff = now - lastDecrease;
-        if (diff >= 86400000) { // 24h
-            places = Math.max(0, places - 1);
-            localStorage.setItem("placesRestantes", places);
-            localStorage.setItem("lastDecreaseTime", now);
-        }
-    }
+checkDailyDecrease();
+document.getElementById("placesRestantes").textContent = places;
 
+setInterval(()=>{
     checkDailyDecrease();
+    document.getElementById("placesRestantes").textContent = places;
+}, 60000);
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("placesRestantes").textContent = places;
-    });
-
-    // Formulaire
-    function showForm() {
-        document.getElementById("formSection").style.display = "block";
-    }
-
-    function validateForm() {
-        let nom = document.getElementById("nom").value;
-        let prenom = document.getElementById("prenom").value;
-        let moyen = document.getElementById("moyen").value;
-
-        if (nom === "" || prenom === "" || moyen === "") {
-            alert("Veuillez remplir toutes les informations.");
-            return;
-        }
-
-        document.getElementById("finalMessage").style.display = "block";
-    }
+// Formulaire
+function showForm(){ document.getElementById("formSection").style.display="block"; }
+function validateForm(){
+    let nom=document.getElementById("nom").value;
+    let prenom=document.getElementById("prenom").value;
+    let moyen=document.getElementById("moyen").value;
+    if(nom==""||prenom==""||moyen==""){ alert("Veuillez remplir toutes les informations."); return; }
+    document.getElementById("finalMessage").style.display="block";
+}
 </script>
 
 </body>
