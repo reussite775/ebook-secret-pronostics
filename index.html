@@ -117,7 +117,7 @@ input, select { width:100%; padding:12px; border-radius:6px; border:none; margin
 </p>
 
 <div id="remainingBox">
-    🔥 Places restantes : <span id="placesRestantes" style="font-size:26px; font-weight:bold;">85</span> / 100
+    🔥 Places restantes : <span id="placesRestantes" style="font-size:26px; font-weight:bold;">75</span> / 100
 </div>
 
 <!-- Bonus PDF -->
@@ -164,8 +164,8 @@ input, select { width:100%; padding:12px; border-radius:6px; border:none; margin
 </div>
 
 <script>
-// Compteur automatique 85 -> baisse 1 toutes les 24h
-let initialPlaces = 85;
+// Compteur automatique 75 -> baisse 1 toutes les 24h
+let initialPlaces = 75;
 let places = parseInt(localStorage.getItem("placesRestantes")) || initialPlaces;
 let lastDecrease = parseInt(localStorage.getItem("lastDecreaseTime")) || Date.now();
 
