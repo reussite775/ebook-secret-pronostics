@@ -133,7 +133,7 @@
             border-color: #ff1744;
         }
 
-        /* Nouveau style pour la section PDF Offerts */
+        /* Section bonus PDF */
         .bonus-box {
             background:#1a1a1a;
             padding:18px;
@@ -169,6 +169,7 @@
         </div>
 
         <p style="text-align:center; font-size:18px;">
+            Découvrez les secrets pour réussir vos pronostics sportifs et maximiser vos gains.<br>
             Prix réel : <span class="old-price">25 000 F CFA</span><br>
             Prix promo : <span class="new-price">8 000 F CFA</span><br>
             🔥 Réservé aux <b>100 premières personnes</b><br>
@@ -180,15 +181,16 @@
             <span id="placesRestantes" style="font-size:26px; font-weight:bold;">85</span> / 100
         </div>
 
-        <!-- NOUVELLE SECTION PDF OFFERTS -->
+        <!-- Section Bonus PDF -->
         <div class="bonus-box">
             <h3>🎁 Bonus Exclusif</h3>
             <p>
-                En rejoignant aujourd’hui, vous recevez <strong>2 PDF offerts</strong> pour débuter :
+                En rejoignant aujourd’hui, vous recevez <strong>3 PDF offerts</strong> pour débuter :
                 <br>📘 <strong>Guide du Trading pour Débutants</strong>
                 <br>📗 <strong>Introduction à l’E-commerce</strong>
+                <br>📕 <strong>Techniques de Paris Sportifs</strong>
                 <br><br>
-                Ces ressources vous permettront d’avancer plus rapidement et d’éviter les erreurs les plus courantes.
+                Ces ressources vous permettront de progresser rapidement et d’éviter les erreurs les plus courantes.
             </p>
         </div>
 
@@ -226,13 +228,9 @@
     </div>
 
 <script>
-    // -------------------------------
-    // COMPTEUR QUI BAISSE CHAQUE 24H
-    // -------------------------------
-
+    // Compteur qui baisse automatiquement chaque 24h
     let initialPlaces = 85;
 
-    // Charger les données stockées
     let places = localStorage.getItem("placesRestantes");
     let lastDecrease = localStorage.getItem("lastDecreaseTime");
 
@@ -243,16 +241,12 @@
 
     function checkDailyDecrease() {
         let now = Date.now();
-
         if (!lastDecrease) {
             localStorage.setItem("lastDecreaseTime", now);
             return;
         }
-
         let diff = now - lastDecrease;
-
-        // 24 heures = 86 400 000 ms
-        if (diff >= 86400000) {
+        if (diff >= 86400000) { // 24h
             places = Math.max(0, places - 1);
             localStorage.setItem("placesRestantes", places);
             localStorage.setItem("lastDecreaseTime", now);
@@ -261,7 +255,6 @@
 
     checkDailyDecrease();
 
-    // Affichage
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("placesRestantes").textContent = places;
     });
